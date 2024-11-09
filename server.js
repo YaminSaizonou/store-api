@@ -47,6 +47,10 @@ app.post('/login', async (req, res) => { login.handleLogin(req, res, postgres, b
 
 app.get('/profile/:id', async (req, res) => { profile.handleProfile(req, res, postgres) });
 
+app.post('/addItem', upload.single('image'), async (req, res) => {addItem.handleAddItem(req, res, postgres) });
+
+app.delete('/deleteItem', async (req, res) => { deleteItem.hanldeDeleteItem(req, res, postgres) });
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
