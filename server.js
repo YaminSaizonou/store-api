@@ -53,6 +53,7 @@ app.delete('/deleteItem', async (req, res) => { deleteItem.hanldeDeleteItem(req,
 
 app.post('/addCategory', async (req, res) => { addCategory.handleAddCategory(req, res, postgres) });
 
+app.post('/addSize', async (req, res) => { addSize.handleAddSize(req, res, postgres) });
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
