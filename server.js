@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
 const knex = require('knex');
+const register = require('./controllers/register');
 
 const postgres = knex({
     client: 'pg',
@@ -34,6 +35,17 @@ const upload = multer({ storage: storage });
 
 
 const PORT = process.env.PORT || 3001; 
+
+// Define a route
+app.get('/', (req, res) => {
+    res.send('Hello, world!'); 
+});
+
+app.post('/register', async (req, res) => { register.handleRegister(req, res, postgres, bcrypt) });
+
+app.post('/login', async (req, res) => { login.handleLogin(req, res, postgres, bcrypt) });
+
+app.get('/profile/:id', async (req, res) => { profile.handleProfile(req, res, postgres) });
 
 // Start the server
 app.listen(PORT, () => {
