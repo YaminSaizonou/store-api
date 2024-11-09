@@ -51,6 +51,8 @@ app.post('/addItem', upload.single('image'), async (req, res) => {addItem.handle
 
 app.delete('/deleteItem', async (req, res) => { deleteItem.hanldeDeleteItem(req, res, postgres) });
 
+app.post('/addCategory', async (req, res) => { addCategory.handleAddCategory(req, res, postgres) });
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
