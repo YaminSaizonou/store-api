@@ -62,6 +62,8 @@ app.post('/orders', async (req, res) => { orders.handleOrders (req, res, postgre
 app.get('/cart', async (req, res) => { cart.handleCart (req, res, postgres) });
 
 app.post('/addToCart', async (req, res) => { addToCart.handleAddToCart (req, res, postgres) });
+
+app.delete('/removeFromCart', async (req, res) => { removeFromCart.handleRemoveFromCart (req, res, postgres) });
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
