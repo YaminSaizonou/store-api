@@ -54,6 +54,13 @@ app.delete('/deleteItem', async (req, res) => { deleteItem.hanldeDeleteItem(req,
 app.post('/addCategory', async (req, res) => { addCategory.handleAddCategory(req, res, postgres) });
 
 app.post('/addSize', async (req, res) => { addSize.handleAddSize(req, res, postgres) });
+
+app.get('/items', async (req, res) => { items.handleItems(req, res, postgres) });
+
+app.post('/orders', async (req, res) => { orders.handleOrders (req, res, postgres) });
+
+app.get('/cart', async (req, res) => { cart.handleCart (req, res, postgres) });
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
