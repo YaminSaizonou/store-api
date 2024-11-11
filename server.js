@@ -6,6 +6,16 @@ const multer = require('multer');
 const path = require('path');
 const knex = require('knex');
 const register = require('./controllers/register');
+const login = require('./controllers/login');
+const profile = require('./controllers/profile');
+const addItem = require('./controllers/addItem');
+const deleteItem = require('./controllers/deleteItem');
+const addCategory = require('./controllers/addCategory');
+const cart = require('./controllers/cart');
+const addToCart = require('./controllers/addToCart');
+const removeFromCart = require('./controllers/removeFromCart');
+const items = require('./controllers/items');
+const orders = require('./controllers/order');
 
 const postgres = knex({
     client: 'pg',
