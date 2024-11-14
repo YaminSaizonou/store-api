@@ -1,15 +1,16 @@
 const handleAddCategory = async (req, res, postgres) => {
     try{
-        const { item_id, category_id } = req.body;
-        const itemCategory = await postgres
+        const { category_name, category_id, gender} = req.body;
+        const categories = await postgres
                 .insert({
-                    item_id: item_id,
-                    category_id: category_id
+                    category_id: category_id,
+                    category_name: category_name,
+                    gender : gender
                 })
-                .into('item_categories')
+                .into('categories')
                 .returning('*');
                 
-                res.json(itemCategory[0]);
+                res.json(categories[0]);
     }
     catch (error) {
         console.error('Error adding the categories:', error);
