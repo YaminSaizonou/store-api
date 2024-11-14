@@ -1,4 +1,4 @@
-const handleItems =async (req, res, postgres) => {
+const handleCategories =async (req, res, postgres) => {
     try {
         let categories;
 
@@ -15,5 +15,5 @@ const handleItems =async (req, res, postgres) => {
 }
 
 module.exports = {
-    handleItems: handleItems
+    handleCategories: handleCategories
 }
