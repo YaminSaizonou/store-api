@@ -1,13 +1,15 @@
 const handleAddItem = async (req, res, postgres)  => {
     try{
-     const { name, price, description} = req.body;
+     const { name, price, description, category_id} = req.body;
      const image = req.file.path;
      const item = await postgres
      .insert({
          name: name,
          price: price,
          description: description,
-         image: image
+         image: image,
+         category_id: category_id
+
      })
      .into('items')
      .returning('*');

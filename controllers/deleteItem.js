@@ -1,30 +1,22 @@
-const hanldeDeleteItem = async (req, res, postgres) => {
-    const { item_id } = req.body;
+const handleDeleteItem = async (req, res, postgres) => {
+    const { id } = req.params; // Access 'id' from params
 
-    if (!item_id) {
+    if (!id) {
         return res.status(400).json({ error: 'Item ID is required' });
     }
 
     try {
         const deletedItem = await postgres.transaction(async (trx) => {
-            // Delete item from the items table
             const deletedItems = await trx
                 .delete()
                 .from('items')
-                .where('item_id', item_id)
+                .where('item_id', id)
                 .returning('*');
 
-            // Delete related categories from the item_categories table
-            await trx
-                .delete()
-                .from('item_categories')
-                .where('item_id', item_id);
-
-            // Delete related sizes from the item_sizes table
             await trx
                 .delete()
                 .from('item_sizes')
-                .where('item_id', item_id);
+                .where('item_id', id);
 
             return deletedItems;
         });
@@ -41,5 +33,5 @@ const hanldeDeleteItem = async (req, res, postgres) => {
 }
 
 module.exports = {
-    hanldeDeleteItem: hanldeDeleteItem
-}
+    handleDeleteItem
+};
