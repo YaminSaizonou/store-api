@@ -20,6 +20,7 @@ const categories = require('./controllers/categories');
 const womenCategories = require('./controllers/getWomenCategories');
 const menCategories = require('./controllers/getMenCategories');
 const itemByCategory = require('./controllers/itemByCategory');
+const profiles = require('./controllers/profiles');
 
 const postgres = knex({
     client: 'pg',
@@ -67,6 +68,7 @@ app.get('/categories', async (req, res) => { categories.handleCategories(req, re
 app.get('/womenCategories', async (req, res) => { womenCategories.getWomenCategories(req, res, postgres) });
 app.get('/menCategories', async (req, res) => { menCategories.getMenCategories(req, res, postgres) });
 app.post('/orders', async (req, res) => { orders.handleOrders(req, res, postgres) });
+app.get('/profiles', async (req, res) => { profiles.handleProfiles(req, res, postgres) });
 app.get('/cart', async (req, res) => { cart.handleCart(req, res, postgres) });
 app.post('/addToCart', async (req, res) => { addToCart.handleAddToCart(req, res, postgres) });
 app.delete('/removeFromCart', async (req, res) => { removeFromCart.handleRemoveFromCart(req, res, postgres) });
