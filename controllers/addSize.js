@@ -1,4 +1,4 @@
-const handleAddSize = async (req, res) => {
+const handleAddSize = async (req, res, postgres) => {
     try{
         const { item_id, size_id, quantity } = req.body;
         const itemSize = await postgres

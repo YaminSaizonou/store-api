@@ -9,6 +9,7 @@ const register = require('./controllers/register');
 const login = require('./controllers/login');
 const profile = require('./controllers/profile');
 const addItem = require('./controllers/addItem');
+const addSize = require('./controllers/addSize');
 const deleteItem = require('./controllers/deleteItem');
 const addCategory = require('./controllers/addCategory');
 const cart = require('./controllers/cart');
