@@ -18,6 +18,13 @@ const handleLogin = async (req, res, postgres, bcrypt) => {
           .from('users')
           .where('email', '=', email);
   
+          const cartData = await postgres
+          .select('*')
+          .from('carts')
+          .where('user_id', '=', userData[0].user_id);
+  
+          userData[0].cart_id = cartData[0].cart_id;
+          
         res.json(userData[0]);
       } else {
         res.status(400).json('wrong credentials');
