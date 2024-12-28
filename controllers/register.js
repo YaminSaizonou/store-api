@@ -17,13 +17,6 @@ const handleRegister = async (req, res, postgres, bcrypt) => {
         .into('users')
         .returning('user_id', 'email', 'name', 'joined');
 
-        await trx('cart')
-        .insert({
-            user_id: newUser[0].user_id
-        })
-        .into('carts')
-        .returning('*');
-
         await trx('login')
         .insert({
             email: email,

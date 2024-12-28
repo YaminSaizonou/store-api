@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config();
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -12,17 +13,18 @@ const addItem = require('./controllers/addItem');
 const addSize = require('./controllers/addSize');
 const deleteItem = require('./controllers/deleteItem');
 const addCategory = require('./controllers/addCategory');
-const cart = require('./controllers/cart');
-const addToCart = require('./controllers/addToCart');
-const removeFromCart = require('./controllers/removeFromCart');
 const items = require('./controllers/items');
-const orders = require('./controllers/order');
 const categories = require('./controllers/categories');
 const womenCategories = require('./controllers/getWomenCategories');
 const menCategories = require('./controllers/getMenCategories');
 const itemByCategory = require('./controllers/itemByCategory');
 const profiles = require('./controllers/profiles');
 const item = require('./controllers/item');
+const checkout = require('./controllers/checkout');
+const Stripe = require('stripe');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY)
+
+
 
 const postgres = knex({
     client: 'pg',
@@ -57,6 +59,7 @@ app.get('/', (req, res) => {
     res.send('Hello, world!');
 });
 
+app.post('/checkout', async (req, res) => { checkout.handleCheckout(req, res, stripe) });
 app.post('/register', async (req, res) => { register.handleRegister(req, res, postgres, bcrypt) });
 app.post('/login', async (req, res) => { login.handleLogin(req, res, postgres, bcrypt) });
 app.get('/profile/:id', async (req, res) => { profile.handleProfile(req, res, postgres) });
@@ -70,11 +73,9 @@ app.get('/itemsByCategory', async (req, res) => { itemByCategory.handleItemsByCa
 app.get('/categories', async (req, res) => { categories.handleCategories(req, res, postgres) });
 app.get('/womenCategories', async (req, res) => { womenCategories.getWomenCategories(req, res, postgres) });
 app.get('/menCategories', async (req, res) => { menCategories.getMenCategories(req, res, postgres) });
-app.post('/orders', async (req, res) => { orders.handleOrders(req, res, postgres) });
 app.get('/profiles', async (req, res) => { profiles.handleProfiles(req, res, postgres) });
-app.get('/cart', async (req, res) => { cart.handleCart(req, res, postgres) });
-app.post('/addToCart', async (req, res) => { addToCart.handleAddToCart(req, res, postgres) });
-app.delete('/removeFromCart', async (req, res) => { removeFromCart.handleRemoveFromCart(req, res, postgres) });
+
+
 
 // Start the server
 app.listen(PORT, () => {
