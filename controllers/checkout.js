@@ -19,8 +19,8 @@ const handleCheckout = async (req, res, stripe) => {
             line_items: lineItems,
             payment_method_types: ['card', 'paypal'],
             mode: 'payment',
-            success_url: 'http://localhost:3001/pages/Success',
-            cancel_url: 'http://localhost:3001/pages/cancel',
+            success_url: 'https://store-frontend-48zk.onrender.com/pages/Success',
+            cancel_url: 'https://store-frontend-48zk.onrender.com/pages/cancel',
         });
 
         res.json({ sessionId: session.id });
