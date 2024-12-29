@@ -29,10 +29,10 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY)
 const postgres = knex({
     client: 'pg',
     connection: {
-        host: '127.0.0.1',
-        user: '',
-        password: '',
-        database: 'store'
+        host: 'dpg-ctoon3d2ng1s73bko7lg-a',
+        user: 'store_db_q8tr_user',
+        password: 'VFGMXBOnMPHVUyGz5m7t3uqQt7qrMcxK',
+        database: 'store_db_q8tr'
     }
 });
 
